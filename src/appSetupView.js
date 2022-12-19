@@ -32,7 +32,7 @@ export class AppSetupView {
 
     #updateTheme() {
 
-        let theme = localStorage.getItem('theme')
+        let theme = LocalStorageService.getItem('theme')
         if (!theme) {
             theme = Object.keys(this.#THEMES)[0]
         }
