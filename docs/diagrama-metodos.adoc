@@ -1,0 +1,83 @@
+
+= MDS 2022
+COUNTRY APP
+:toc-title: Index
+:toc: none
+
+:idprefix:
+:idseparator: -
+:imagesdir: images
+
+
+
+[plantuml, DiagramaDomain, svg]
+....
+
+
+entity CountryApp {
+    fuction run()
+}
+
+package "Views" <<Rectangle>> #ddd {
+
+    entity DOM #caa {
+        <filter-radio>
+        <filter-selector>
+        <country-selector>
+        <country-info>
+    }
+
+    class CountryFilterView #acc {
+        #countrySelectorView
+        #elementFilterRadio
+        #elementFilterSelector
+        #radioValue
+        -renderFilterSelector(filterType)
+        #addListenerToFilterRadio()
+        #addListenerToFilterSelector()
+    }
+
+    class CountrySelectorView #acc {
+        #countryDataService
+        #countryInfoView
+        #elementCountrySelector
+        - renderCountrySelector(filter, filterSelection)
+        #getCountrySelectorOptions(filter, filterSelection)
+        #addListenerToCountrySelector()
+    }
+
+    class CountryInfoView #acc {
+        #countryDataService
+        -renderCountryInfo(countryCode)
+    }
+}
+
+package "Model" <<Rectangle>> #ddd {
+
+    class CountryDataService #aca {
+        -getCountryDataAll()
+        -getCountryDataByCode(code)
+        -getCountryDataByRegion(region)
+        -getCountryDataBySubregion(subregion)
+        #APIfetch(url, isOneObjectArray)
+    }
+}
+
+
+CountryApp *--> CountryFilterView
+CountryApp *--> CountrySelectorView
+CountryApp *--> CountryInfoView
+
+DOM -u-> CountryApp
+
+CountryFilterView -l> DOM
+CountrySelectorView -l> DOM
+CountryInfoView -u-> DOM
+
+CountryFilterView --> CountrySelectorView
+CountrySelectorView --> CountryInfoView
+
+CountrySelectorView .> CountryDataService
+CountryInfoView .u.> CountryDataService
+
+....
