@@ -2,21 +2,9 @@
 export class LocalStorageService {
 
 
-    static initItem(key, defaultValue) {
+    static getItem(key) {
 
-        let value = localStorage.getItem(key)
-        if (!value) {
-            value = defaultValue
-            localStorage.setItem(key, value)
-        }
-        return value
-    }
-
-
-    static updateItem(key, value) {
-
-        localStorage.setItem(key, value)
-        return value
+        return localStorage.getItem(key)
     }
 
 
@@ -27,8 +15,13 @@ export class LocalStorageService {
     }
 
 
-    static getItem(key) {
+    static initItem(key, defaultValue) {
 
-        return localStorage.getItem(key)
+        let value = localStorage.getItem(key)
+        if (!value) {
+            value = defaultValue
+            localStorage.setItem(key, value)
+        }
+        return value
     }
 }

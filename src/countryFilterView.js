@@ -50,7 +50,7 @@ export class CountryFilterView {
         this.#renderElemFilterSelector()
 
         const defaultFilterSelector = (this.#FILTERS[this.#filterRadio])[0]
-        LocalStorageService.updateItem('filterSelector', defaultFilterSelector)
+        LocalStorageService.setItem('filterSelector', defaultFilterSelector)
         this.#elemFilterSelector.value = defaultFilterSelector
         this.#countrySelectorView.updateElemCountrySelector(this.#filterRadio, defaultFilterSelector)
     }
@@ -72,7 +72,7 @@ export class CountryFilterView {
             element.addEventListener("input", (event) => {
                 // console.log('Event -> INPUT filter-radio')
                 this.#filterRadio = event.target.value
-                LocalStorageService.updateItem('filterRadio', this.#filterRadio)
+                LocalStorageService.setItem('filterRadio', this.#filterRadio)
                 this.#updateElemFilterSelector()
             })
         })
@@ -83,7 +83,7 @@ export class CountryFilterView {
         this.#elemFilterSelector.addEventListener("input", (event) => {
             // console.log('Event -> INPUT filter-selector')
             const filterSelector = event.target.value
-            LocalStorageService.updateItem('filterSelector', filterSelector)
+            LocalStorageService.setItem('filterSelector', filterSelector)
             this.#countrySelectorView.updateElemCountrySelector(this.#filterRadio, filterSelector)
         })
     }

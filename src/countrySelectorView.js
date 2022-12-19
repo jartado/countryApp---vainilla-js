@@ -34,7 +34,7 @@ export class CountrySelectorView {
         await this.#renderElemCountrySelector(filterRadio, filterSelector);
 
         const firstCountrySelector = this.#elemCountrySelector.options[0].value
-        const countrySelector = LocalStorageService.updateItem('countrySelector', firstCountrySelector)
+        const countrySelector = LocalStorageService.setItem('countrySelector', firstCountrySelector)
         this.#elemCountrySelector.value = countrySelector
         this.#countryInfoView.renderCountryInfo(countrySelector)
     }
@@ -70,7 +70,7 @@ export class CountrySelectorView {
         this.#elemCountrySelector.addEventListener("input", (event) => {
             // console.log('Event -> INPUT country-selector')
             const countrySelector = event.target.value
-            LocalStorageService.updateItem('countrySelector', countrySelector)
+            LocalStorageService.setItem('countrySelector', countrySelector)
             this.#countryInfoView.renderCountryInfo(countrySelector)
         })
     }
